@@ -1,0 +1,29 @@
+table {
+  width: 100%;
+  border: 1px solid rgb(255, 102, 51);
+}
+
+table td {
+  border: none;
+  padding: 10px 20px 10px 10px;
+}
+
+thead {
+  height: 60px;
+}
+
+thead td {
+  border-bottom: 2px solid rgb(255, 102, 51);
+}
+
+table tr {
+  border-spacing: 0;
+}
+
+tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+tbody tr td {
+  border-bottom: 1px solid rgba(255, 102, 51, 0.3);
+}

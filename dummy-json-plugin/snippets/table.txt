@@ -1,0 +1,12 @@
+<div class="content">
+    <table id="{{table_id}}">
+        <thead>
+        <tr>
+            {% for item in column_list.split(';') %}
+            <td>{{item}}</td>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody id="{{table_id}}-body"></tbody>
+    </table>
+</div>

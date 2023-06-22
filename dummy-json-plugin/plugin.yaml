@@ -1,0 +1,68 @@
+schema-version: v1
+kind: plugin
+metadata:
+  name: dummy-json-plugin
+  display-name: dummy-json-plugin
+  description: Geração de tabela na página HTML
+  version: 0.0.1
+  picture: plugin.png
+spec:
+  type: app
+  compatibility:
+    - python
+  about: docs/about.md
+  implementation: docs/implementation.md
+  release-notes: docs/release-notes-0.0.1.md
+  requirements: docs/requirements.md
+  technologies: # Ref: https://docs.stackspot.com/docs/create-stacks/yaml-files/yaml/#technologies
+    - Api
+  inputs:
+    - label: Nome da tabela que será gerada
+      name: table_id
+      type: text
+      required: true
+      default: product-list
+      help: 'Informe o nome da tabela que será gerada na página HTML'
+    - label: Colunas da tabela separado por ';'
+      name: column_list
+      type: text
+      default: ID;TÍTULO;DESCRIÇÃO
+      required: true
+      help: 'Informe quantidade de colunas da tabela que será gerada'
+    - label: Atributos da tabela separado por ';' (respectivamente do inserido nas colunas)
+      name: attr_list
+      type: text
+      default: id;title;description
+      required: true
+      help: 'Informe os atributos das colunas na mesma ordem que inserido no campo column_list'
+  hooks:
+    - type: edit
+      trigger: before-render
+      path: index.html
+      changes:
+        - search:
+            string: "</body>"
+            insert-before:
+              snippet: snippets/table.txt
+            when:
+              not-exists: "<table id=\"{{table_id}}\">"
+    - type: edit
+      trigger: before-render
+      path: index.html
+      changes:
+        - search:
+            string: "</html>"
+            insert-before:
+              snippet: snippets/import-js.txt
+            when:
+              not-exists: "./js/{{table_id}}Action.js"
+    - type: edit
+      trigger: before-render
+      path: index.html
+      changes:
+        - search:
+            string: "</head>"
+            insert-before:
+              snippet: snippets/import-css.txt
+            when:
+              not-exists: "css/ListProducts.css"

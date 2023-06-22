@@ -1,0 +1,26 @@
+schema-version: v1
+kind: plugin
+metadata:
+  name: base-html-plugin
+  display-name: base-html-plugin
+  description: Criação de projeto base HTML
+  version: 0.0.1
+  picture: plugin.png
+spec:
+  type: app
+  compatibility:
+    - html
+    - javascript
+  about: docs/about.md
+  implementation: docs/implementation.md
+  release-notes: docs/release-notes-0.0.1.md
+  requirements: docs/requirements.md
+  technologies: # Ref: https://docs.stackspot.com/docs/create-stacks/yaml-files/yaml/#technologies
+    - Api
+  inputs:
+    - label: Titulo da página HTML
+      name: title
+      type: text
+      required: true
+      default: Treinamento - StackSpot
+      help: 'Informe o título da página HTML que será gerada'
